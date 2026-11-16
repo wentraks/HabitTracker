@@ -1,23 +1,62 @@
-﻿namespace HabitTracker;
+﻿using HabitTracker.Models;
+
+namespace HabitTracker;
 
 public partial class MainPage : ContentPage
 {
-    int count = 0;
+    private readonly List<HabitItem> _tasks = new();
+    private int _nextId = 1;
 
     public MainPage()
     {
         InitializeComponent();
+        LoadTestData();
+        RefreshList();
     }
 
-    private void OnCounterClicked(object? sender, EventArgs e)
+    // Временная коллекция тестовых задач
+    private void LoadTestData()
     {
-        count++;
+        string[] titles =
+        {
+            "Изучить XAML",
+            "Выполнить практическую работу",
+            "Повторить C#",
+            "Подготовить проект"
+        };
 
-        if (count == 1)
-            CounterBtn.Text = $"Clicked {count} time";
-        else
-            CounterBtn.Text = $"Clicked {count} times";
+        foreach (var title in titles)
+        {
+            _tasks.Add(new HabitItem { Id = _nextId++, Title = title });
+        }
 
-        SemanticScreenReader.Announce(CounterBtn.Text);
+        // Одна задача выполнена, чтобы сразу увидеть визуальное отличие
+        _tasks[0].IsCompleted = true;
+    }
+
+    // Обновление списка с учётом переключателя
+    private void RefreshList()
+    {
+        TasksView.ItemsSource = HideCompletedSwitch.IsToggled
+            ? _tasks.Where(t => !t.IsCompleted).ToList()
+            : _tasks.ToList();
+    }
+
+    // Добавление новой задачи
+    private void OnAddClicked(object? sender, EventArgs e)
+    {
+        var title = TaskEntry.Text?.Trim();
+        if (string.IsNullOrEmpty(title))
+            return;
+
+        _tasks.Add(new HabitItem { Id = _nextId++, Title = title });
+        TaskEntry.Text = string.Empty;
+        RefreshList();
+    }
+
+    // Переключатель «Скрыть выполненные»
+    private void OnHideCompletedToggled(object? sender, ToggledEventArgs e)
+    {
+        RefreshList();
     }
 }
