@@ -35,29 +35,30 @@
                         Clicked="OnAddClicked" />
             </Grid>
 
-            
+            <HorizontalStackLayout Spacing="8">
+                <Switch x:Name="HideCompletedSwitch"
+                        Toggled="OnHideCompletedToggled" />
+                <Label Text="Скрыть выполненные"
+                       VerticalOptions="Center" />
+            </HorizontalStackLayout>
 
         </VerticalStackLayout>
 
         <!-- Строка 2: список (одновременно область прокрутки) -->
-        
         <CollectionView x:Name="TasksView"
                         Grid.Row="2"
                         SelectionMode="None">
+
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="10,6"
-                          ColumnDefinitions="Auto,*,Auto"
-                          ColumnSpacing="10">
+                <DataTemplate x:DataType="models:HabitItem">
+                    <!-- Border удалён: нет границ у задачи -->
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
 
                         <Label Grid.Column="0"
-                               Text="{Binding Id}"
-                               TextColor="Gray"
-                               VerticalOptions="Center" />
-
-                        <Label Grid.Column="1"
                                Text="{Binding Title}"
-                               VerticalOptions="Center">
+                               FontSize="16"
+                               VerticalOptions="Center"
+                               LineBreakMode="WordWrap">
                             <Label.Triggers>
                                 <DataTrigger TargetType="Label"
                                              Binding="{Binding IsCompleted}"
@@ -68,22 +69,15 @@
                             </Label.Triggers>
                         </Label>
 
-                        <CheckBox Grid.Column="2"
-                                  IsChecked="{Binding IsCompleted, Mode=TwoWay}"
+                        <CheckBox Grid.Column="1"
+                                  IsChecked="{Binding IsCompleted}"
                                   VerticalOptions="Center" />
 
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-        </CollectionView>
-        <HorizontalStackLayout Grid.Row="3" Spacing="11">
-            <Switch x:Name="HideCompletedSwitch"
-                    Toggled="OnHideCompletedToggled" />
-            <Label Text="Скрыть"
-                   VerticalOptions="Center" />
-        </HorizontalStackLayout>
 
-        
+        </CollectionView>
 
     </Grid>
 </ContentPage>
