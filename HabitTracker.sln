@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HabitTracker", "HabitTracker\HabitTracker.csproj", "{BCADCC9C-5467-43F1-8B42-0E8709AC7F1B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCADCC9C-5467-43F1-8B42-0E8709AC7F1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCADCC9C-5467-43F1-8B42-0E8709AC7F1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCADCC9C-5467-43F1-8B42-0E8709AC7F1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCADCC9C-5467-43F1-8B42-0E8709AC7F1B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
